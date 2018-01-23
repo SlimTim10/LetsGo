@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+class Navbar extends Component {
+  render() {
+    return (
+      <nav className="navbar">
+        <span className="navbar-user">{this.props.username}</span>
+        <a href="/" className="navbar-brand">Let&apos;s Go</a>
+      </nav>
+    );
+  }
+}
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbar username="Tim" />
       </div>
     );
   }
