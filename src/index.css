@@ -1,5 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400");
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+	background: #00c000;
+	border-bottom: 2px solid black;
+	border-radius: 10px 10px 0 0;
+	padding-left: 5px;
+}
+.navbar-brand {
+	display: block;
+	text-decoration: none;
+	font-size: 1.5em;
+	color: inherit;
+	background: #00c000;
+}
+.navbar-user {
+	display: block;
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 1.3em;
+}
+
+.messages {
+	border-left: 3px solid #00c000;
+	border-right: 3px solid #00c000;
+	border-bottom: 3px solid #00c000;
+}
+
+.message {
+	padding: 0 5px 5px 5px;
+	border-bottom: 1px solid black;
+}
+
+.message-date {
+	font-size: 0.9em;
+	text-decoration: underline dashed;
+	text-align: right;
+
+}
+
+.message-content {
+	margin-bottom: 3px;
+}
+
+.message-people {
+	margin-bottom: 3px;
+}
+
+.person {
+	display: inline-block;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	border-radius: 5px;
+	padding: 0 5px;
+}
+
+.going {
+	background: #00c000;
+}
+.going::before {
+	content: "+";
+}
+
+.not-going {
+	background: #db0000;
+}
+.not-going::before {
+	content: "-";
+}
+
+.message-controls {
+	text-align: center;
+	padding-top: 3px;
+}
+
+.btn {
+	border: none;
+	border-radius: 10px;
+	font-family: Courier New;
+	color: #ffffff;
+	font-size: 1.2em;
+	font-weight: 700;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+}
+.btn:hover {
+	text-decoration: none;
+}
+
+.btn-plus {
+	background: #00c000;
+}
+.btn-plus:hover {
+	background: #169e16;
+}
+
+.btn-minus {
+	background: #db0000;
+}
+.btn-minus:hover {
+	background: #bd2222;
 }
