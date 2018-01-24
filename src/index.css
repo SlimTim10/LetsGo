@@ -56,6 +56,7 @@ body {
 	display: inline-block;
 	margin-top: 2px;
 	margin-bottom: 2px;
+	margin-right: 3px;
 	border-radius: 5px;
 	padding: 0 5px;
 }
@@ -95,6 +96,7 @@ body {
 
 .btn-plus {
 	background: #00c000;
+	margin-right: 5px;
 }
 .btn-plus:hover {
 	background: #169e16;
