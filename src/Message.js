@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-
-const Status = Object.freeze({
-  going: Symbol("going"),
-  notGoing: Symbol("not going")
-});
+import Status from './Status';
 
 class Message extends Component {
   render() {

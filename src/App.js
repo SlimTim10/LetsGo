@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Messages from './Messages';
+import Status from './Status';
 import './App.css';
-
-const Status = Object.freeze({
-  going: Symbol("going"),
-  notGoing: Symbol("not going")
-});
 
 class App extends Component {
   constructor(props) {
