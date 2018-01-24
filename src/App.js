@@ -34,6 +34,24 @@ class App extends Component {
       messages: [message1, message2]
     };
   }
+
+  componentDidMount() {
+    console.log("componentDidMount <App />");
+    setTimeout(() => {
+      console.log("Simulating incoming message");
+      const newMessage = {
+        id: 3,
+        date: "Jan 24 12:13 PM",
+        content: "Fred suggests event on Thu Jan 25 at 10:00 AM",
+        people: [
+          { id: 3, name: "Bob", status: Status.going },
+          { id: 4, name: "Alice", status: Status.notGoing }
+        ]
+      };
+      const messages = this.state.messages.concat(newMessage);
+      this.setState({ messages: messages });
+    }, 3000);
+  }
   
   render() {
     return (
