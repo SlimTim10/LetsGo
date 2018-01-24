@@ -30,7 +30,10 @@ class App extends Component {
     };
     
     this.state = {
-      currentUser: {name: "Tim"},
+      currentUser: {
+        id: 0,
+        name: "Tim"
+      },
       messages: [message1, message2]
     };
   }
@@ -57,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar username={this.state.currentUser.name} />
-        <Messages messages={this.state.messages} />
+        <Messages messages={this.state.messages} user={this.state.currentUser} />
       </div>
     );
   }

@@ -4,7 +4,7 @@ import Message from './Message';
 class Messages extends Component {
   render() {
     const messages = this.props.messages.map(m => {
-      return <Message key={m.id} data={m} />;
+      return <Message key={m.id} data={m} user={this.props.user} />;
     });
     
     return (
