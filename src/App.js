@@ -1,67 +1,12 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
+import Messages from './Messages';
 import './App.css';
 
 const Status = Object.freeze({
   going: Symbol("going"),
   notGoing: Symbol("not going")
 });
-
-class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar">
-        <span className="navbar-user">{this.props.username}</span>
-        <a href="/" className="navbar-brand">Let&apos;s Go</a>
-      </nav>
-    );
-  }
-}
-
-class Messages extends Component {
-  render() {
-    const messages = this.props.messages.map(m => {
-      return <Message key={m.id} data={m} />;
-    });
-    
-    return (
-      <main className="messages">
-        {messages}
-      </main>
-    );
-  }
-}
-
-class Message extends Component {
-  render() {
-    const data = this.props.data;
-    const people = data.people.map(p => {
-      switch (p.status) {
-      case Status.going:
-        return <div key={p.id} className="person going">{p.name}</div>;
-      case Status.notGoing:
-        return <div key={p.id} className="person not-going">{p.name}</div>;
-      default:
-        console.error("Invalid status");
-        break;
-      };
-      return undefined;
-    });
-    
-    return (
-      <div className="message">
-        <div className="message-date">{data.date}</div>
-        <div className="message-content">{data.content}</div>
-        <div className="message-people">
-          {people}
-        </div>
-        <div className="message-controls">
-          <button className="btn btn-plus">+</button>
-          <button className="btn btn-minus">-</button>
-        </div>
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   constructor(props) {
