@@ -23,8 +23,8 @@ class App extends Component {
       content: "Tim suggests gym on Wed May 24 at 6:30 PM",
       people: [
         { id: 3, name: "Bob", status: Status.going },
-        { id: 4, name: "Alice", status: Status.going },
         { id: 1, name: "Fred", status: Status.notGoing },
+        { id: 4, name: "Alice", status: Status.going },
         { id: 2, name: "Mary", status: Status.notGoing },
       ]
     };
@@ -47,8 +47,8 @@ class App extends Component {
         date: "Jan 24 12:13 PM",
         content: "Fred suggests event on Thu Jan 25 at 10:00 AM",
         people: [
+          { id: 4, name: "Alice", status: Status.notGoing },
           { id: 3, name: "Bob", status: Status.going },
-          { id: 4, name: "Alice", status: Status.notGoing }
         ]
       };
       const messages = this.state.messages.concat(newMessage);

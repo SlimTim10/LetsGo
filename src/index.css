@@ -96,7 +96,8 @@ body {
 
 .btn-plus {
 	background: #00c000;
-	margin-right: 5px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 .btn-plus:hover {
 	background: #169e16;
@@ -104,6 +105,8 @@ body {
 
 .btn-minus {
 	background: #db0000;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 .btn-minus:hover {
 	background: #bd2222;
