@@ -29,7 +29,7 @@ function createButtonPlus(status, onclick) {
   if (status !== Status.going) {
     return <button className="btn btn-plus" onClick={onclick.bind(this, Status.going)}>+</button>;
   } else {
-    return null;
+    return <button className="btn btn-disabled" onClick={onclick.bind(this, Status.going)}>+</button>;
   }
 }
 
@@ -37,7 +37,7 @@ function createButtonMinus(status, onclick) {
   if (status !== Status.notGoing) {
     return <button className="btn btn-minus" onClick={onclick.bind(this, Status.notGoing)}>-</button>;
   } else {
-    return null;
+    return <button className="btn btn-disabled" onClick={onclick.bind(this, Status.notGoing)}>-</button>;
   }
 }
 

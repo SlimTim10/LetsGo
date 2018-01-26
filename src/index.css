@@ -108,3 +108,9 @@ body {
 .btn-minus:hover {
 	background: #bd2222;
 }
+
+.btn-disabled {
+	background: #d0d0d0;
+	margin-left: 2px;
+	margin-right: 2px;
+}
