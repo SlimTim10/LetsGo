@@ -37,6 +37,13 @@ class App extends Component {
       },
       messages: [message1, message2]
     };
+
+    this.sendNewMessage = this.sendNewMessage.bind(this);
+  }
+
+  sendNewMessage(newMessage) {
+    const messages = this.state.messages.concat(newMessage);
+    this.setState({ messages: messages });
   }
 
   componentDidMount() {
@@ -52,8 +59,7 @@ class App extends Component {
           { id: 3, name: "Bob", status: Status.going },
         ]
       };
-      const messages = this.state.messages.concat(newMessage);
-      this.setState({ messages: messages });
+      this.sendNewMessage(newMessage);
     }, 3000);
   }
   
@@ -62,7 +68,7 @@ class App extends Component {
       <div className="App">
         <Navbar username={this.state.currentUser.name} />
         <Messages messages={this.state.messages} user={this.state.currentUser} />
-        <Suggestion />
+        <Suggestion user={this.state.currentUser} sendNewMessage={this.sendNewMessage} />
       </div>
     );
   }
