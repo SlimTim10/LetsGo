@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Messages from './Messages';
+import Suggestion from './Suggestion';
 import Status from './Status';
 import './App.css';
 
@@ -61,6 +62,7 @@ class App extends Component {
       <div className="App">
         <Navbar username={this.state.currentUser.name} />
         <Messages messages={this.state.messages} user={this.state.currentUser} />
+        <Suggestion />
       </div>
     );
   }
