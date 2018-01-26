@@ -44,6 +44,7 @@ function createButtonMinus(status, onclick) {
 class Message extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       people: this.props.data.people,
       myStatus: Status.none
