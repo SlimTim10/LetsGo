@@ -7,28 +7,27 @@ body {
 }
 
 .navbar {
-	background: #00c000;
+	background: #16471F;
 	border-bottom: 2px solid black;
 	padding-left: 5px;
+}
+.navbar-user {
+	display: block;
+	text-decoration: none;
+	color: #A0A0A0;
+	font-size: 1.3em;
 }
 .navbar-brand {
 	display: inline-block;
 	text-decoration: none;
 	font-size: 1.5em;
-	color: inherit;
-	background: #00c000;
-}
-.navbar-user {
-	display: block;
-	text-decoration: none;
-	color: #ffffff;
-	font-size: 1.3em;
+	color: #FFFFFF;
 }
 
 .messages {
-	border-left: 3px solid #00c000;
-	border-right: 3px solid #00c000;
-	border-bottom: 3px solid #00c000;
+	border-left: 3px solid #16471F;
+	border-right: 3px solid #16471F;
+	border-bottom: 3px solid #16471F;
 }
 
 .message {
@@ -51,23 +50,32 @@ body {
 	margin-bottom: 3px;
 }
 
+.people-going {
+	display: table;
+}
+
+.people-not-going {
+	display: table;
+}
+
 .person {
 	display: inline-block;
 	margin-top: 2px;
 	margin-bottom: 2px;
 	margin-right: 3px;
 	padding: 0 5px;
+	font-weight: 700;
 }
 
 .going {
-	background: #00c000;
+	color: #00931A;
 }
 .going::before {
 	content: "+";
 }
 
 .not-going {
-	background: #db0000;
+	color: #B20022;
 }
 .not-going::before {
 	content: "-";
@@ -92,21 +100,21 @@ body {
 }
 
 .btn-plus {
-	background: #00c000;
+	background: #00931A;
 	margin-left: 2px;
 	margin-right: 2px;
 }
 .btn-plus:hover {
-	background: #169e16;
+	background: #29C044;
 }
 
 .btn-minus {
-	background: #db0000;
+	background: #B20022;
 	margin-left: 2px;
 	margin-right: 2px;
 }
 .btn-minus:hover {
-	background: #bd2222;
+	background: #DA3151;
 }
 
 .btn-disabled {

@@ -29,7 +29,7 @@ function createButtonPlus(status, onclick) {
   if (status !== Status.going) {
     return <button className="btn btn-plus" onClick={onclick.bind(this, Status.going)}>+</button>;
   } else {
-    return <button className="btn btn-disabled" onClick={onclick.bind(this, Status.going)}>+</button>;
+    return <button className="btn btn-disabled">+</button>;
   }
 }
 
@@ -37,7 +37,7 @@ function createButtonMinus(status, onclick) {
   if (status !== Status.notGoing) {
     return <button className="btn btn-minus" onClick={onclick.bind(this, Status.notGoing)}>-</button>;
   } else {
-    return <button className="btn btn-disabled" onClick={onclick.bind(this, Status.notGoing)}>-</button>;
+    return <button className="btn btn-disabled">-</button>;
   }
 }
 
@@ -76,7 +76,8 @@ class Message extends Component {
         <div className="message-date">{data.date}</div>
         <div className="message-content">{data.content}</div>
         <div className="message-people">
-          {peopleGoing(people)}{peopleNotGoing(people)}
+          <div className="people-going">{peopleGoing(people)}</div>
+          <div className="people-not-going">{peopleNotGoing(people)}</div>
         </div>
         <div className="message-controls">
           {buttonPlus}{buttonMinus}
