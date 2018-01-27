@@ -28,7 +28,7 @@ class Message extends Component {
   render() {
     const data = this.props.data;
     const messageDate = moment(data.date).format("MMM D h:mmA");
-    const messageContent = formatMessageContent(data.content);
+    const messageContent = createMessageContent(data.content);
     const people = this.state.people;
 
     const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
@@ -37,7 +37,7 @@ class Message extends Component {
     return (
       <div className="message">
         <div className="message-date">{messageDate}</div>
-        <div className="message-content">{messageContent}</div>
+        {messageContent}
         <div className="message-people">
           <div className="people-going">{peopleGoing(people)}</div>
           <div className="people-not-going">{peopleNotGoing(people)}</div>
@@ -92,8 +92,10 @@ function createButtonMinus(status, onclick) {
   }
 }
 
-function formatMessageContent(content) {
+function createMessageContent(content) {
   const date = moment(content.date).format('ddd MMM D');
   const time = moment(content.date).format('h:mma');
-  return `${content.user.name} suggests ${content.event} on ${date} at ${time}.`;
+  const user = <span className="message-content-user">{content.user.name}</span>;
+  const event = <span className="message-content-event">{content.event}</span>;
+  return <div className="message-content">{user} suggests {event} on {date} at {time}</div>;
 }

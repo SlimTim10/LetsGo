@@ -45,6 +45,14 @@ body {
 	margin-bottom: 3px;
 }
 
+.message-content-user {
+	
+}
+
+.message-content-event {
+	font-weight: 700;
+}
+
 .message-people {
 	margin-bottom: 3px;
 }
