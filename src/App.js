@@ -11,7 +11,7 @@ class App extends Component {
 
     const message1 = {
       id: 1,
-      date: "May 20 6:00 PM",
+      date: new Date('May 20, 2017 18:00:00'),
       content: "Bob suggests party at my house on Sat May 27 at 7:00 PM - 10:00 PM",
       people: [
         { id: 1, name: "Fred", status: Status.going },
@@ -20,7 +20,7 @@ class App extends Component {
     };
     const message2 = {
       id: 2,
-      date: "May 21 10:57 PM",
+      date: new Date('May 21, 2017 22:57:00'),
       content: "Tim suggests gym on Wed May 24 at 6:30 PM",
       people: [
         { id: 3, name: "Bob", status: Status.going },
@@ -52,7 +52,7 @@ class App extends Component {
       console.log("Simulating incoming message");
       const newMessage = {
         id: 3,
-        date: "Jan 24 12:13 PM",
+        date: new Date('January 24, 2018 12:13:00'),
         content: "Fred suggests event on Thu Jan 25 at 10:00 AM",
         people: [
           { id: 4, name: "Alice", status: Status.notGoing },

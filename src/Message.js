@@ -1,5 +1,56 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import Status from './Status';
+
+class Message extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      people: this.props.data.people,
+      myStatus: Status.none
+    };
+    
+    this.handleButton = this.handleButton.bind(this);
+  }
+
+  handleButton(status) {
+    const me = this.props.user;
+    me.status = status;
+
+    const people = removePersonById(this.state.people, me.id);
+    
+    this.setState({
+      people: addPerson(people, me),
+      myStatus: status
+    });
+  }
+  
+  render() {
+    const data = this.props.data;
+    const messageDate = moment(data.date).format("MMM D h:mmA");
+    const people = this.state.people;
+
+    const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
+    const buttonMinus = createButtonMinus(this.state.myStatus, this.handleButton);
+    
+    return (
+      <div className="message">
+        <div className="message-date">{messageDate}</div>
+        <div className="message-content">{data.content}</div>
+        <div className="message-people">
+          <div className="people-going">{peopleGoing(people)}</div>
+          <div className="people-not-going">{peopleNotGoing(people)}</div>
+        </div>
+        <div className="message-controls">
+          {buttonPlus}{buttonMinus}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Message;
 
 function peopleGoing(people) {
   return people
@@ -40,52 +91,3 @@ function createButtonMinus(status, onclick) {
     return <button className="btn btn-disabled">-</button>;
   }
 }
-
-class Message extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      people: this.props.data.people,
-      myStatus: Status.none
-    };
-    
-    this.handleButton = this.handleButton.bind(this);
-  }
-
-  handleButton(status) {
-    const me = this.props.user;
-    me.status = status;
-
-    const people = removePersonById(this.state.people, me.id);
-    
-    this.setState({
-      people: addPerson(people, me),
-      myStatus: status
-    });
-  }
-  
-  render() {
-    const data = this.props.data;
-    const people = this.state.people;
-
-    const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
-    const buttonMinus = createButtonMinus(this.state.myStatus, this.handleButton);
-    
-    return (
-      <div className="message">
-        <div className="message-date">{data.date}</div>
-        <div className="message-content">{data.content}</div>
-        <div className="message-people">
-          <div className="people-going">{peopleGoing(people)}</div>
-          <div className="people-not-going">{peopleNotGoing(people)}</div>
-        </div>
-        <div className="message-controls">
-          {buttonPlus}{buttonMinus}
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Message;
