@@ -16,12 +16,11 @@ class Message extends Component {
 
   handleButton(status) {
     const me = this.props.user;
-    me.status = status;
 
     const people = removePersonById(this.state.people, me.id);
     
     this.setState({
-      people: addPerson(people, me),
+      people: addPerson(people, {user: me, status: status}),
       myStatus: status
     });
   }
@@ -29,6 +28,7 @@ class Message extends Component {
   render() {
     const data = this.props.data;
     const messageDate = moment(data.date).format("MMM D h:mmA");
+    const messageContent = formatMessageContent(data.content);
     const people = this.state.people;
 
     const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
@@ -37,7 +37,7 @@ class Message extends Component {
     return (
       <div className="message">
         <div className="message-date">{messageDate}</div>
-        <div className="message-content">{data.content}</div>
+        <div className="message-content">{messageContent}</div>
         <div className="message-people">
           <div className="people-going">{peopleGoing(people)}</div>
           <div className="people-not-going">{peopleNotGoing(people)}</div>
@@ -56,7 +56,7 @@ function peopleGoing(people) {
   return people
     .filter(p => p.status === Status.going)
     .map(p => {
-      return <div key={p.id} className="person going">{p.name}</div>;
+      return <div key={p.user.id} className="person going">{p.user.name}</div>;
     });
 }
 
@@ -64,7 +64,7 @@ function peopleNotGoing(people) {
   return people
     .filter(p => p.status === Status.notGoing)
     .map(p => {
-      return <div key={p.id} className="person not-going">{p.name}</div>;
+      return <div key={p.user.id} className="person not-going">{p.user.name}</div>;
     });
 }
 
@@ -73,7 +73,7 @@ function addPerson(people, person) {
 }
 
 function removePersonById(people, id) {
-  return people.filter(p => p.id !== id);
+  return people.filter(p => p.user.id !== id);
 }
 
 function createButtonPlus(status, onclick) {
@@ -90,4 +90,10 @@ function createButtonMinus(status, onclick) {
   } else {
     return <button className="btn btn-disabled">-</button>;
   }
+}
+
+function formatMessageContent(content) {
+  const date = moment(content.date).format('ddd MMM D');
+  const time = moment(content.date).format('h:mma');
+  return `${content.user.name} suggests ${content.event} on ${date} at ${time}.`;
 }

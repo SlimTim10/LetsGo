@@ -64,17 +64,21 @@ class Suggestion extends Component {
 
   submitSuggestion() {
     const me = this.props.user;
-    me.status = Status.going;
 
-    const messageDate = new Date('Jan 26, 2017 14:46:00');
     const suggestion = this.state.value;
-    const eventDate = "Sat Jan 27 at 11:00 AM"; // TODO: Use value from date selector
+    const eventDate = new Date('Jan 27, 2018 11:00:00'); // TODO: Use value from date selector
     
     const newMessage = {
       id: 4,
-      date: messageDate,
-      content: me.name + " suggests " + suggestion + " on " + eventDate,
-      people: [ me ]
+      date: new Date(),
+      content: {
+        user: me,
+        event: suggestion,
+        date: eventDate
+      },
+      people: [
+        { user: me, status: Status.going }
+      ]
     };
     this.props.sendNewMessage(newMessage);
   }
