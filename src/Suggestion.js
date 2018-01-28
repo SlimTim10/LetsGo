@@ -10,6 +10,7 @@ class Suggestion extends Component {
     super(props);
 
     this.state = {
+      hasError: false,
       makingSuggestion: false,
       value: '',
       date: null,
@@ -28,6 +29,7 @@ class Suggestion extends Component {
     this.handleCancelButton = this.handleCancelButton.bind(this);
     
     this.submitSuggestion = this.submitSuggestion.bind(this);
+    this.renderErrorMessage = this.renderErrorMessage.bind(this);
   }
 
   createSuggestionButton() {
@@ -41,6 +43,8 @@ class Suggestion extends Component {
   createSuggestionInput() {
     if (this.state.makingSuggestion) {
       const name = this.props.user.name;
+      const errorMessage = this.renderErrorMessage();
+      
       return (
         <div>
           <p>{name} suggests <input type="text" value={this.state.value} onChange={this.handleValueChange} /></p>
@@ -59,6 +63,7 @@ class Suggestion extends Component {
               onChange={this.handleTimeChange}
               />
           </MuiThemeProvider>
+          {errorMessage}
           <button className="btn-submit-suggestion" onClick={this.handleSubmitButton}>Submit</button>
           <button className="btn-cancel-suggestion" onClick={this.handleCancelButton}>Cancel</button>
         </div>
@@ -85,18 +90,25 @@ class Suggestion extends Component {
   }
 
   handleSubmitButton() {
-    this.setState({ makingSuggestion: false });
     this.submitSuggestion();
   }
 
   handleCancelButton() {
     this.setState({ makingSuggestion: false });
+    this.setState({ hasError: false });
   }
 
   submitSuggestion() {
     const me = this.props.user;
 
     const suggestion = this.state.value;
+
+    if (!suggestion || !this.state.date || !this.state.time) {
+      this.setState({ hasError: true });
+      return;
+    } else {
+      this.setState({ hasError: false });
+    }
     
     const datePick = moment(this.state.date).startOf('hour');
     const timePick = moment(this.state.time);
@@ -114,7 +126,18 @@ class Suggestion extends Component {
         { user: me, status: Status.going }
       ]
     };
+    
     this.props.sendNewMessage(newMessage);
+
+    this.setState({ makingSuggestion: false });
+  }
+
+  renderErrorMessage() {
+    if (this.state.hasError) {
+      return <p className="error">Oops! I didn't get that.</p>;
+    } else {
+      return null;
+    }
   }
 
   render() {

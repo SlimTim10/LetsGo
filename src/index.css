@@ -180,3 +180,10 @@ body {
 	text-decoration: none;
 	background: #DA3151;
 }
+
+.error {
+	color: red;
+	font-family: inherit;
+	font-size: inherit;
+	margin: 5px;
+}
