@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import Navbar from './Navbar';
 import Messages from './Messages';
 import Suggestion from './Suggestion';
@@ -19,11 +20,11 @@ class App extends Component {
 
     const message1 = {
       id: 1,
-      date: new Date('May 20, 2017 18:00:00'),
+      date: moment('2017-05-20 18:00:00'),
       content: {
         user: Users[3],
         event: 'party at my house',
-        date: new Date('May 27, 2017 19:00:00')
+        date: moment('2017-05-27 19:00:00')
       },
       people: [
         { user: Users[1], status: Status.going },
@@ -32,11 +33,11 @@ class App extends Component {
     };
     const message2 = {
       id: 2,
-      date: new Date('May 21, 2017 22:57:00'),
+      date: moment('2017-05-21 22:57:00'),
       content: {
         user: Users[0],
         event: 'gym',
-        date: new Date('May 24, 2017 18:30:00')
+        date: moment('2017-05-24 18:30:00')
       },
       people: [
         { user: Users[3], status: Status.going },
@@ -65,11 +66,11 @@ class App extends Component {
       console.log("Simulating incoming message");
       const newMessage = {
         id: 3,
-        date: new Date('January 24, 2018 12:13:00'),
+        date: moment('2018-01-24 12:13:00'),
         content: {
           user: Users[1],
           event: 'hang out',
-          date: new Date('Jan 25, 2018 10:00:00')
+          date: moment('2018-01-25 10:00:00')
         },
         people: [
           { user: Users[4], status: Status.notGoing },

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import Status from './Status';
 
 class Message extends Component {
@@ -27,7 +26,7 @@ class Message extends Component {
   
   render() {
     const data = this.props.data;
-    const messageDate = moment(data.date).format("MMM D h:mmA");
+    const messageDate = data.date.format("MMM D h:mmA");
     const messageContent = createMessageContent(data.content);
     const people = this.state.people;
 
@@ -93,8 +92,8 @@ function createButtonMinus(status, onclick) {
 }
 
 function createMessageContent(content) {
-  const date = moment(content.date).format('ddd MMM D');
-  const time = moment(content.date).format('h:mma');
+  const date = content.date.format('ddd MMM D');
+  const time = content.date.format('h:mma');
   const user = <span className="message-content-user">{content.user.name}</span>;
   const event = <span className="message-content-event">{content.event}</span>;
   return <div className="message-content">{user} suggests {event} on {date} at {time}</div>;
