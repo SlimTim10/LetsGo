@@ -63,7 +63,7 @@ class Suggestion extends Component {
               onChange={this.handleTimeChange}
               />
           </MuiThemeProvider>
-          {errorMessage}
+          {this.state.hasError && errorMessage}
           <button className="btn-submit-suggestion" onClick={this.handleSubmitButton}>Submit</button>
           <button className="btn-cancel-suggestion" onClick={this.handleCancelButton}>Cancel</button>
         </div>

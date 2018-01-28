@@ -131,6 +131,17 @@ body {
 	margin-right: 2px;
 }
 
+.btn-delete {
+	background: #000000;
+	padding: 5px;
+	font-size: 0.8em;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.btn-delete:hover {
+	background: #505050;
+}
+
 .suggestion {
 	text-align: center;
 	margin-top: 20px;
