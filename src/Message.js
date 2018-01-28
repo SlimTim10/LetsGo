@@ -23,6 +23,10 @@ class Message extends Component {
       myStatus: status
     });
   }
+
+  handleDelete(status) {
+    console.log('Delete');
+  }
   
   render() {
     const data = this.props.data;
@@ -30,6 +34,7 @@ class Message extends Component {
     const messageContent = createMessageContent(data.content);
     const people = this.state.people;
 
+    const buttonDelete = createButtonDelete(this.handleDelete);
     const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
     const buttonMinus = createButtonMinus(this.state.myStatus, this.handleButton);
     
@@ -42,7 +47,7 @@ class Message extends Component {
           <div className="people-not-going">{peopleNotGoing(people)}</div>
         </div>
         <div className="message-controls">
-          {buttonPlus}{buttonMinus}
+          {buttonDelete}{buttonPlus}{buttonMinus}
         </div>
       </div>
     );
@@ -73,6 +78,10 @@ function addPerson(people, person) {
 
 function removePersonById(people, id) {
   return people.filter(p => p.user.id !== id);
+}
+
+function createButtonDelete(onclick) {
+  return <button className="btn btn-delete" onClick={onclick}>Delete</button>;
 }
 
 function createButtonPlus(status, onclick) {
