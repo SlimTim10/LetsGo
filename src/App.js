@@ -53,10 +53,16 @@ class App extends Component {
     };
 
     this.sendNewMessage = this.sendNewMessage.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
   }
 
   sendNewMessage(newMessage) {
     const messages = this.state.messages.concat(newMessage);
+    this.setState({ messages: messages });
+  }
+
+  deleteMessage(message) {
+    const messages = this.state.messages.filter(m => m.id !== message.id);
     this.setState({ messages: messages });
   }
 
@@ -84,9 +90,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar username={this.state.currentUser.name} />
-        <Messages messages={this.state.messages} user={this.state.currentUser} />
-        <Suggestion user={this.state.currentUser} sendNewMessage={this.sendNewMessage} />
+        <Navbar
+          username={this.state.currentUser.name}
+          />
+        <Messages
+          messages={this.state.messages}
+          user={this.state.currentUser}
+          deleteMessage={this.deleteMessage}
+          />
+        <Suggestion
+          user={this.state.currentUser}
+          sendNewMessage={this.sendNewMessage}
+          />
       </div>
     );
   }

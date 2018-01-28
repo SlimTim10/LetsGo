@@ -11,6 +11,7 @@ class Message extends Component {
     };
     
     this.handleButton = this.handleButton.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleButton(status) {
@@ -25,7 +26,7 @@ class Message extends Component {
   }
 
   handleDelete(status) {
-    console.log('Delete');
+    this.props.deleteMessage(this.props.data);
   }
   
   render() {
