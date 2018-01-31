@@ -18,6 +18,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.socket = null;
+
     const message1 = {
       id: 1,
       date: moment('2017-05-20 18:00:00'),
@@ -68,6 +70,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("componentDidMount <App />");
+    
     setTimeout(() => {
       console.log("Simulating incoming message");
       const newMessage = {
@@ -85,6 +88,11 @@ class App extends Component {
       };
       this.sendNewMessage(newMessage);
     }, 3000);
+
+    this.socket = new WebSocket("ws://localhost:3001");
+    this.socket.onopen = function(evt) {
+      console.log('Connected to server');
+    };
   }
   
   render() {
