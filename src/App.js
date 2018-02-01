@@ -6,6 +6,8 @@ import Suggestion from './Suggestion';
 import Status from './Status';
 import './App.css';
 
+const SERVER_PORT = '3001';
+
 const Users = [
   {id: 0, name: "Tim"},
   {id: 1, name: 'Fred'},
@@ -61,6 +63,7 @@ class App extends Component {
   sendNewMessage(newMessage) {
     const messages = this.state.messages.concat(newMessage);
     this.setState({ messages: messages });
+    this.socket.send(JSON.stringify(newMessage));
   }
 
   deleteMessage(message) {
@@ -89,7 +92,7 @@ class App extends Component {
       this.sendNewMessage(newMessage);
     }, 3000);
 
-    this.socket = new WebSocket("ws://localhost:3001");
+    this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
     this.socket.onopen = function(evt) {
       console.log('Connected to server');
     };
