@@ -6,7 +6,7 @@ import Suggestion from './Suggestion';
 import Status from './Status';
 import './App.css';
 
-const SERVER_PORT = '3001';
+const SERVER_PORT = 3001;
 
 const Users = [
   {id: 0, name: "Tim"},
