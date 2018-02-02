@@ -23,7 +23,6 @@ class App extends Component {
     this.socket = null;
 
     const message1 = {
-      id: 1,
       date: moment('2017-05-20 18:00:00'),
       content: {
         user: Users[3],
@@ -36,7 +35,6 @@ class App extends Component {
       ]
     };
     const message2 = {
-      id: 2,
       date: moment('2017-05-21 22:57:00'),
       content: {
         user: Users[0],
@@ -53,7 +51,7 @@ class App extends Component {
     
     this.state = {
       currentUser: Users[0],
-      messages: [message1, message2]
+      messages: []
     };
 
     this.sendNewMessage = this.sendNewMessage.bind(this);
@@ -61,14 +59,15 @@ class App extends Component {
   }
 
   sendNewMessage(newMessage) {
-    const messages = this.state.messages.concat(newMessage);
-    this.setState({ messages: messages });
+    // TODO server handles messages
+    // const messages = this.state.messages.concat(newMessage);
     this.socket.send(JSON.stringify(newMessage));
   }
 
   deleteMessage(message) {
-    const messages = this.state.messages.filter(m => m.id !== message.id);
-    this.setState({ messages: messages });
+    // TODO server handles messages
+    // const messages = this.state.messages.filter(m => m.id !== message.id);
+    // this.setState({ messages: messages });
   }
 
   componentDidMount() {
@@ -77,7 +76,6 @@ class App extends Component {
     setTimeout(() => {
       console.log("Simulating incoming message");
       const newMessage = {
-        id: 3,
         date: moment('2018-01-24 12:13:00'),
         content: {
           user: Users[1],
@@ -93,8 +91,14 @@ class App extends Component {
     }, 3000);
 
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
-    this.socket.onopen = function(evt) {
+    
+    this.socket.onopen = (evt) => {
       console.log('Connected to server');
+    };
+
+    this.socket.onmessage = (evt) => {
+      console.log('Message received');
+      // this.setState({ messages: messages });
     };
   }
   

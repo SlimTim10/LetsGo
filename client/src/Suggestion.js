@@ -115,7 +115,6 @@ class Suggestion extends Component {
     const eventDate = combineDateTime(datePick, timePick);
 
     const newMessage = {
-      id: 4,
       date: moment(),
       content: {
         user: me,
