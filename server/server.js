@@ -13,7 +13,8 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', (message) => {
-    console.log('received: %s', JSON.parse(message));
+    console.log('received: %s', message);
+    const msg = JSON.parse(message);
   });
 
   ws.on('close', () => console.log('Client disconnected'));
