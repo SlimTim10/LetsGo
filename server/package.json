@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "watch": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,5 +13,8 @@
     "express": "4.16.2",
     "uuid": "^3.2.1",
     "ws": "4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
   }
 }
