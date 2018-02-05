@@ -10,6 +10,7 @@ class Messages extends Component {
           data={m}
           user={this.props.user}
           deleteMessage={this.props.deleteMessage}
+          updateMessage={this.props.updateMessage}
           />);
     });
     

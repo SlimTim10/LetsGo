@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+
 import Navbar from './Navbar';
 import Messages from './Messages';
 import Suggestion from './Suggestion';
@@ -54,20 +55,51 @@ class App extends Component {
       messages: []
     };
 
+    this.sendData = this.sendData.bind(this);
+
     this.sendNewMessage = this.sendNewMessage.bind(this);
+    this.sendUpdateMessage = this.sendUpdateMessage.bind(this);
+    this.sendDeleteMessage = this.sendDeleteMessage.bind(this);
+    
+    this.newMessage = this.newMessage.bind(this);
+    this.updateMessage = this.updateMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
   }
 
+  sendData(type, message) {
+    this.socket.send(JSON.stringify({
+      type: type,
+      message: message
+    }));
+  }
+
   sendNewMessage(newMessage) {
-    // TODO server handles messages
-    // const messages = this.state.messages.concat(newMessage);
-    this.socket.send(JSON.stringify(newMessage));
+    this.sendData('new', newMessage);
+  }
+
+  sendUpdateMessage(message) {
+    this.sendData('update', message);
+  }
+
+  sendDeleteMessage(message) {
+    this.sendData('delete', message);
+  }
+
+  newMessage(message) {
+    const messages = this.state.messages.concat(message);
+    this.setState({ messages: messages });
+  }
+
+  updateMessage(message) {
+    const messages = this.state.messages;
+    const i = messages.findIndex(m => m.id === message.id);
+    messages[i] = message;
+    this.setState({ messages: messages });
   }
 
   deleteMessage(message) {
-    // TODO server handles messages
-    // const messages = this.state.messages.filter(m => m.id !== message.id);
-    // this.setState({ messages: messages });
+    const messages = this.state.messages.filter(m => m.id !== message.id);
+    this.setState({ messages: messages });
   }
 
   componentDidMount() {
@@ -75,7 +107,7 @@ class App extends Component {
     
     setTimeout(() => {
       console.log("Simulating incoming message");
-      const newMessage = {
+      const message = {
         date: moment('2018-01-24 12:13:00'),
         content: {
           user: Users[1],
@@ -87,18 +119,33 @@ class App extends Component {
           { user: Users[3], status: Status.going },
         ]
       };
-      this.sendNewMessage(newMessage);
+      this.sendNewMessage(message);
     }, 3000);
 
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
     
-    this.socket.onopen = (evt) => {
+    this.socket.onopen = (event) => {
       console.log('Connected to server');
     };
 
-    this.socket.onmessage = (evt) => {
-      console.log('Message received');
-      // this.setState({ messages: messages });
+    this.socket.onmessage = (event) => {
+      console.log('Message received', event);
+      if (!event.isTrusted) return;
+      const msg = JSON.parse(event.data);
+
+      switch (msg.type) {
+      case 'new':
+        this.newMessage(msg.message);
+        break;
+      case 'update':
+        this.updateMessage(msg.message);
+        break;
+      case 'delete':
+        this.deleteMessage(msg.message);
+        break;
+      default:
+        break;
+      }
     };
   }
   
@@ -111,11 +158,12 @@ class App extends Component {
         <Messages
           messages={this.state.messages}
           user={this.state.currentUser}
-          deleteMessage={this.deleteMessage}
+          deleteMessage={this.sendDeleteMessage}
+          updateMessage={this.sendUpdateMessage}
           />
         <Suggestion
           user={this.state.currentUser}
-          sendNewMessage={this.sendNewMessage}
+          newMessage={this.sendNewMessage}
           />
       </div>
     );

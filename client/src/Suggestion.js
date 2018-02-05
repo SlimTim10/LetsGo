@@ -114,7 +114,7 @@ class Suggestion extends Component {
     const timePick = moment(this.state.time);
     const eventDate = combineDateTime(datePick, timePick);
 
-    const newMessage = {
+    const message = {
       date: moment(),
       content: {
         user: me,
@@ -126,7 +126,7 @@ class Suggestion extends Component {
       ]
     };
     
-    this.props.sendNewMessage(newMessage);
+    this.props.newMessage(message);
 
     this.setState({ makingSuggestion: false });
   }

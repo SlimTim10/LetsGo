@@ -13,26 +13,34 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
-  ws.on('message', (message) => {
-    console.log('received: %s', message);
-    const msg = JSON.parse(message);
-    msg.id = uuid();
+  ws.on('message', (msg) => {
+    console.log('received: %s', msg);
 
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
+    const data = JSON.parse(msg);
+
+    switch (data.type) {
+    case 'new':
+      data.message.id = uuid();
+      broadcastAll(data);
+      break;
+    case 'update':
+      broadcastAll(data);
+      break;
+    case 'delete':
+      broadcastAll(data);
+      break;
+    default:
+      break;
+    }
   });
 
   ws.on('close', () => console.log('Client disconnected'));
 });
 
-// Broadcast to all.
-wss.broadcast = function broadcast(data) {
-  wss.clients.forEach(function each(client) {
+const broadcastAll = (data) => {
+  wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(data);
+      client.send(JSON.stringify(data));
     }
   });
 };

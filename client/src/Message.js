@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+
 import Status from './Status';
 
 class Message extends Component {
@@ -6,7 +8,6 @@ class Message extends Component {
     super(props);
     
     this.state = {
-      people: this.props.data.people,
       myStatus: Status.none
     };
     
@@ -17,12 +18,12 @@ class Message extends Component {
   handleButton(status) {
     const me = this.props.user;
 
-    const people = removePersonById(this.state.people, me.id);
-    
-    this.setState({
-      people: addPerson(people, {user: me, status: status}),
-      myStatus: status
-    });
+    const message = this.props.data;
+    const people = removePersonById(me.id, message.people);
+    const newPeople = addPerson({user: me, status: status}, people);
+
+    message.people = newPeople;
+    this.props.updateMessage(message);
   }
 
   handleDelete(status) {
@@ -31,9 +32,9 @@ class Message extends Component {
   
   render() {
     const data = this.props.data;
-    const messageDate = data.date.format("MMM D h:mmA");
+    const messageDate = moment(data.date).format("MMM D h:mmA");
     const messageContent = createMessageContent(data.content);
-    const people = this.state.people;
+    const people = data.people;
 
     const buttonDelete = createButtonDelete(this.handleDelete);
     const buttonPlus = createButtonPlus(this.state.myStatus, this.handleButton);
@@ -73,11 +74,11 @@ function peopleNotGoing(people) {
     });
 }
 
-function addPerson(people, person) {
+function addPerson(person, people) {
   return people.concat(person);
 }
 
-function removePersonById(people, id) {
+function removePersonById(id, people) {
   return people.filter(p => p.user.id !== id);
 }
 
@@ -102,8 +103,9 @@ function createButtonMinus(status, onclick) {
 }
 
 function createMessageContent(content) {
-  const date = content.date.format('ddd MMM D');
-  const time = content.date.format('h:mma');
+  const mDate = moment(content.date);
+  const date = mDate.format('ddd MMM D');
+  const time = mDate.format('h:mma');
   const user = <span className="message-content-user">{content.user.name}</span>;
   const event = <span className="message-content-event">{content.event}</span>;
   return <div className="message-content">{user} suggests {event} on {date} at {time}</div>;

@@ -1,7 +1,7 @@
 const Status = Object.freeze({
-  going: Symbol("going"),
-  notGoing: Symbol("not going"),
-  none: Symbol("none")
+  none: 0,
+  going: 1,
+  notGoing: 2
 });
 
 export default Status;
