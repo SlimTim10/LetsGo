@@ -105,23 +105,6 @@ class App extends Component {
   componentDidMount() {
     console.log("componentDidMount <App />");
     
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      const message = {
-        date: moment('2018-01-24 12:13:00'),
-        content: {
-          user: Users[1],
-          event: 'hang out',
-          date: moment('2018-01-25 10:00:00')
-        },
-        people: [
-          { user: Users[4], status: Status.notGoing },
-          { user: Users[3], status: Status.going },
-        ]
-      };
-      this.sendNewMessage(message);
-    }, 3000);
-
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
     
     this.socket.onopen = (event) => {
