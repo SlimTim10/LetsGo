@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
+
+import DatePicker from './DatePicker';
+import TimePicker from './TimePicker';
 import Status from './Status';
 
 class Suggestion extends Component {
@@ -48,21 +48,14 @@ class Suggestion extends Component {
       return (
         <div>
           <p>{name} suggests <input type="text" value={this.state.value} onChange={this.handleValueChange} /></p>
-          <MuiThemeProvider>
-            <DatePicker
-              hintText="Date"
-              value={this.state.date}
-              onChange={this.handleDateChange}
-              firstDayOfWeek={0}
-              />
-          </MuiThemeProvider>
-          <MuiThemeProvider>
-            <TimePicker
-              hintText="Time"
-              value={this.state.time}
-              onChange={this.handleTimeChange}
-              />
-          </MuiThemeProvider>
+          <DatePicker
+            value={this.state.date}
+            onChange={this.handleDateChange}
+            />
+          <TimePicker
+            value={this.state.time}
+            onChange={this.handleTimeChange}
+            />
           {this.state.hasError && errorMessage}
           <button className="btn-submit-suggestion" onClick={this.handleSubmitButton}>Submit</button>
           <button className="btn-cancel-suggestion" onClick={this.handleCancelButton}>Cancel</button>
@@ -77,12 +70,12 @@ class Suggestion extends Component {
     this.setState({ value: event.target.value });
   }
 
-  handleDateChange(event, date) {
-    this.setState({ date: date });
+  handleDateChange(event) {
+    this.setState({ date: event.target.value });
   }
 
-  handleTimeChange(event, date) {
-    this.setState({ time: date });
+  handleTimeChange(event) {
+    this.setState({ time: event.target.value });
   }
 
   handleSuggestionButton() {
@@ -111,7 +104,7 @@ class Suggestion extends Component {
     }
     
     const datePick = moment(this.state.date).startOf('hour');
-    const timePick = moment(this.state.time);
+    const timePick = moment(this.state.time, "HH:mm");
     const eventDate = combineDateTime(datePick, timePick);
 
     const message = {
