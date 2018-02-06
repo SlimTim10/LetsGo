@@ -23,33 +23,6 @@ class App extends Component {
 
     this.socket = null;
 
-    const message1 = {
-      date: moment('2017-05-20 18:00:00'),
-      content: {
-        user: Users[3],
-        event: 'party at my house',
-        date: moment('2017-05-27 19:00:00')
-      },
-      people: [
-        { user: Users[1], status: Status.going },
-        { user: Users[2], status: Status.going },
-      ]
-    };
-    const message2 = {
-      date: moment('2017-05-21 22:57:00'),
-      content: {
-        user: Users[0],
-        event: 'gym',
-        date: moment('2017-05-24 18:30:00')
-      },
-      people: [
-        { user: Users[3], status: Status.going },
-        { user: Users[1], status: Status.notGoing },
-        { user: Users[4], status: Status.going },
-        { user: Users[2], status: Status.notGoing },
-      ]
-    };
-    
     this.state = {
       currentUser: Users[0],
       messages: []
