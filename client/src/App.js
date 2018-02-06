@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Messages from './Messages';
 import Suggestion from './Suggestion';
+
 import './App.css';
 
 const SERVER_PORT = 3001;

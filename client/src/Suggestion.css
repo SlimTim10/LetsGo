@@ -1,0 +1,56 @@
+.suggestion {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.btn-suggestion {
+	border: none;
+	color: #ffffff;
+	background: #00931A;
+	font-size: 1.2em;
+	padding: 15px 20px 15px 20px;
+	text-decoration: none;
+	border-radius: 4px;
+}
+.btn-suggestion:hover {
+	text-decoration: none;
+	background: #29C044;
+}
+
+.btn-submit-suggestion {
+	background: #00931A;
+	border: none;
+	color: #ffffff;
+	font-size: inherit;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-radius: 4px;
+	margin-right: 2px;
+}
+.btn-submit-suggestion:hover {
+	text-decoration: none;
+	background: #29C044;
+}
+
+.btn-cancel-suggestion {
+	background: #B20022;
+	border: none;
+	color: #ffffff;
+	font-size: inherit;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-radius: 4px;
+	margin-left: 2px;
+}
+.btn-cancel-suggestion:hover {
+	text-decoration: none;
+	background: #DA3151;
+}
+
+.error {
+	color: red;
+	font-family: inherit;
+	font-size: inherit;
+	margin: 5px;
+}

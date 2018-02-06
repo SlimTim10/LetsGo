@@ -5,6 +5,8 @@ import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 import Status from './Status';
 
+import './Suggestion.css';
+
 class Suggestion extends Component {
   constructor(props) {
     super(props);

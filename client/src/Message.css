@@ -1,0 +1,110 @@
+.message {
+	padding: 0 5px 5px 5px;
+	border-bottom: 1px solid black;
+}
+
+.message-date {
+	font-size: 0.8em;
+	text-align: right;
+}
+
+.message-content {
+	margin-bottom: 3px;
+}
+
+.message-content-user {
+	
+}
+
+.message-content-event {
+	font-weight: 700;
+}
+
+.message-people {
+	margin-bottom: 3px;
+}
+
+.people-going {
+	display: table;
+}
+
+.people-not-going {
+	display: table;
+}
+
+.person {
+	display: inline-block;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-right: 3px;
+	padding: 0 5px;
+	font-weight: 700;
+}
+
+.going {
+	color: #00931A;
+}
+.going::before {
+	content: "+";
+}
+
+.not-going {
+	color: #B20022;
+}
+.not-going::before {
+	content: "-";
+}
+
+.message-controls {
+	text-align: right;
+	padding-top: 3px;
+}
+
+.btn {
+	border: none;
+	font-family: Courier New;
+	color: #ffffff;
+	font-size: 1.2em;
+	font-weight: 700;
+	padding: 5px 20px 5px 20px;
+	text-decoration: none;
+	border-radius: 4px;
+}
+.btn:hover {
+	text-decoration: none;
+}
+
+.btn-plus {
+	background: #00931A;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.btn-plus:hover {
+	background: #29C044;
+}
+
+.btn-minus {
+	background: #B20022;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.btn-minus:hover {
+	background: #DA3151;
+}
+
+.btn-disabled {
+	background: #d0d0d0;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.btn-delete {
+	background: #000000;
+	padding: 5px;
+	font-size: 0.8em;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.btn-delete:hover {
+	background: #505050;
+}
