@@ -149,7 +149,7 @@ class Suggestion extends Component {
 
 export default Suggestion;
 
-function combineDateTime(mdate, mtime) {
+const combineDateTime = (mdate, mtime) => {
   return mdate.add({
     hours: mtime.hours(),
     minutes: mtime.minutes()

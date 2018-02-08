@@ -60,7 +60,7 @@ class Message extends Component {
 
 export default Message;
 
-function peopleGoing(people) {
+const peopleGoing = (people) => {
   return people
     .filter(p => p.status === Status.going)
     .map(p => {
@@ -68,7 +68,7 @@ function peopleGoing(people) {
     });
 }
 
-function peopleNotGoing(people) {
+const peopleNotGoing = (people) => {
   return people
     .filter(p => p.status === Status.notGoing)
     .map(p => {
@@ -76,19 +76,19 @@ function peopleNotGoing(people) {
     });
 }
 
-function addPerson(person, people) {
+const addPerson = (person, people) => {
   return people.concat(person);
 }
 
-function removePersonById(id, people) {
+const removePersonById = (id, people) => {
   return people.filter(p => p.user.id !== id);
 }
 
-function createButtonDelete(onclick) {
+const createButtonDelete = (onclick) => {
   return <button className="btn btn-delete" onClick={onclick}>Delete</button>;
 }
 
-function createButtonPlus(status, onclick) {
+const createButtonPlus = (status, onclick) => {
   if (status !== Status.going) {
     return <button className="btn btn-plus" onClick={onclick.bind(this, Status.going)}>+</button>;
   } else {
@@ -96,7 +96,7 @@ function createButtonPlus(status, onclick) {
   }
 }
 
-function createButtonMinus(status, onclick) {
+const createButtonMinus = (status, onclick) => {
   if (status !== Status.notGoing) {
     return <button className="btn btn-minus" onClick={onclick.bind(this, Status.notGoing)}>-</button>;
   } else {
@@ -104,7 +104,7 @@ function createButtonMinus(status, onclick) {
   }
 }
 
-function createMessageContent(content) {
+const createMessageContent = (content) => {
   const mDate = moment(content.date);
   const date = mDate.format('ddd MMM D');
   const time = mDate.format('h:mma');
