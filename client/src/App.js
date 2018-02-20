@@ -9,11 +9,11 @@ import './App.css';
 const SERVER_PORT = 3001;
 
 const Users = [
-  {id: 0, name: "Tim"},
+  {id: 0, name: 'Tim'},
   {id: 1, name: 'Fred'},
   {id: 2, name: 'Mary'},
-  {id: 3, name: "Bob"},
-  {id: 4, name: "Alice"},
+  {id: 3, name: 'Bob'},
+  {id: 4, name: 'Alice'},
 ];
 
 class App extends Component {
@@ -75,7 +75,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount <App />");
+    console.log('componentDidMount <App />');
     
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
     
