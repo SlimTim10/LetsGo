@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Messages from './Messages';
 import Suggestion from './Suggestion';
 
-import './App.css';
+import './Room.css';
 
 const SERVER_PORT = 3001;
 
@@ -16,7 +16,7 @@ const Users = [
   {id: 4, name: 'Alice'},
 ];
 
-class App extends Component {
+class Room extends Component {
   constructor(props) {
     super(props);
 
@@ -75,8 +75,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount <App />');
-    
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
     
     this.socket.onopen = (event) => {
@@ -106,7 +104,7 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
+      <div className="Room">
         <Navbar
           username={this.state.currentUser.name}
           />
@@ -125,4 +123,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Room;
