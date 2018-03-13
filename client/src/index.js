@@ -14,10 +14,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 const Home = () => (
   <div>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/room">Room</Link></li>
-    </ul>
     <h2>Home</h2>
   </div>
 );
