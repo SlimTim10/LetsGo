@@ -18,31 +18,17 @@ class Suggestion extends Component {
       date: null,
       time: null
     };
-
-    this.createSuggestionButton = this.createSuggestionButton.bind(this);
-    this.createSuggestionInput = this.createSuggestionInput.bind(this);
-
-    this.handleValueChange = this.handleValueChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-    
-    this.handleSuggestionButton = this.handleSuggestionButton.bind(this);
-    this.handleSubmitButton = this.handleSubmitButton.bind(this);
-    this.handleCancelButton = this.handleCancelButton.bind(this);
-    
-    this.submitSuggestion = this.submitSuggestion.bind(this);
-    this.renderErrorMessage = this.renderErrorMessage.bind(this);
   }
 
-  createSuggestionButton() {
+  createSuggestionButton = () => {
     if (!this.state.makingSuggestion) {
       return <button className="btn-suggestion" onClick={this.handleSuggestionButton}>New suggestion</button>;
     } else {
       return null;
     }
-  }
+  };
 
-  createSuggestionInput() {
+  createSuggestionInput = () => {
     if (this.state.makingSuggestion) {
       const name = this.props.user.name;
       const errorMessage = this.renderErrorMessage();
@@ -68,32 +54,32 @@ class Suggestion extends Component {
     }
   }
 
-  handleValueChange(event) {
+  handleValueChange = event => {
     this.setState({ value: event.target.value });
-  }
+  };
 
-  handleDateChange(event) {
+  handleDateChange = event => {
     this.setState({ date: event.target.value });
-  }
+  };
 
-  handleTimeChange(event) {
+  handleTimeChange = event => {
     this.setState({ time: event.target.value });
-  }
+  };
 
-  handleSuggestionButton() {
+  handleSuggestionButton = () => {
     this.setState({ makingSuggestion: true });
-  }
+  };
 
-  handleSubmitButton() {
+  handleSubmitButton = () => {
     this.submitSuggestion();
-  }
+  };
 
-  handleCancelButton() {
+  handleCancelButton = () => {
     this.setState({ makingSuggestion: false });
     this.setState({ hasError: false });
-  }
+  };
 
-  submitSuggestion() {
+  submitSuggestion = () => {
     const me = this.props.user;
 
     const suggestion = this.state.value;
@@ -124,15 +110,15 @@ class Suggestion extends Component {
     this.props.newMessage(message);
 
     this.setState({ makingSuggestion: false });
-  }
+  };
 
-  renderErrorMessage() {
+  renderErrorMessage = () => {
     if (this.state.hasError) {
       return <p className="error">Oops! I didn't get that.</p>;
     } else {
       return null;
     }
-  }
+  };
 
   render() {
     const suggestionButton = this.createSuggestionButton();
@@ -154,4 +140,4 @@ const combineDateTime = (mdate, mtime) => {
     hours: mtime.hours(),
     minutes: mtime.minutes()
   });
-}
+};
