@@ -1,3 +1,5 @@
+import * as R from 'ramda';
+
 import React, { Component } from 'react';
 
 import Navbar from './Navbar';
@@ -5,6 +7,12 @@ import Messages from './Messages';
 import Suggestion from './Suggestion';
 
 import './Room.css';
+
+const MSG = Object.freeze({
+  new: 'new',
+  update: 'update',
+  delete: 'delete'
+});
 
 const SERVER_PORT = 3001;
 
@@ -26,53 +34,37 @@ class Room extends Component {
       currentUser: Users[0],
       messages: []
     };
-
-    this.sendData = this.sendData.bind(this);
-
-    this.sendNewMessage = this.sendNewMessage.bind(this);
-    this.sendUpdateMessage = this.sendUpdateMessage.bind(this);
-    this.sendDeleteMessage = this.sendDeleteMessage.bind(this);
-    
-    this.newMessage = this.newMessage.bind(this);
-    this.updateMessage = this.updateMessage.bind(this);
-    this.deleteMessage = this.deleteMessage.bind(this);
   }
 
-  sendData(type, message) {
+  sendData = type => message => {
     this.socket.send(JSON.stringify({
       type: type,
       message: message
     }));
-  }
+  };
 
-  sendNewMessage(newMessage) {
-    this.sendData('new', newMessage);
-  }
+  sendNewMessage = this.sendData(MSG.new);
 
-  sendUpdateMessage(message) {
-    this.sendData('update', message);
-  }
+  sendUpdateMessage = this.sendData(MSG.update);
 
-  sendDeleteMessage(message) {
-    this.sendData('delete', message);
-  }
+  sendDeleteMessage = this.sendData(MSG.delete);
 
-  newMessage(message) {
-    const messages = this.state.messages.concat(message);
+  newMessage = message => {
+    const messages = R.append(message, this.state.messages);
     this.setState({ messages: messages });
-  }
+  };
 
-  updateMessage(message) {
+  updateMessage = message => {
     const messages = this.state.messages;
-    const i = messages.findIndex(m => m.id === message.id);
+    const i = R.findIndex(R.propEq('id', message.id))(messages);
     messages[i] = message;
     this.setState({ messages: messages });
-  }
+  };
 
-  deleteMessage(message) {
-    const messages = this.state.messages.filter(m => m.id !== message.id);
+  deleteMessage = message => {
+    const messages = R.filter(m => m.id !== message.id, this.state.messages);
     this.setState({ messages: messages });
-  }
+  };
 
   componentDidMount() {
     this.socket = new WebSocket(`ws://localhost:${SERVER_PORT}`);
@@ -83,17 +75,18 @@ class Room extends Component {
 
     this.socket.onmessage = (event) => {
       console.log('Message received', event);
+      
       if (!event.isTrusted) return;
+      
       const msg = JSON.parse(event.data);
-
       switch (msg.type) {
-      case 'new':
+      case MSG.new:
         this.newMessage(msg.message);
         break;
-      case 'update':
+      case MSG.update:
         this.updateMessage(msg.message);
         break;
-      case 'delete':
+      case MSG.delete:
         this.deleteMessage(msg.message);
         break;
       default:
